@@ -2,12 +2,31 @@
 import { useRef } from "react";
 import styled from "styled-components";
 
-const FormCont = styled.div`
+const FormCont = styled.form`
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 30px;
 
-    .form__contianer {
+    .form__container {
         display: flex;
+        gap: 50px;
+    }
+
+    .form__team {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form__winner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
     }
 `;
 
@@ -49,8 +68,7 @@ const Form = ({ players }) => {
     const team2p2 = useRef();
     const winningTeam = useRef();
 
-    const updateHandler = (e) => {
-        e.preventDefault();
+    const updateHandler = () => {
         const team = winningTeam.current.selectedOptions[0].value;
         let winners;
         let lossers;
@@ -80,7 +98,7 @@ const Form = ({ players }) => {
     return (
         <FormCont>
             <div className="form__container">
-                <div>
+                <div className="form__team">
                     <label htmlFor="team1">Team 1</label>
                     <select name="team1" defaultValue={"default"} ref={team1}>
                         <option value="default" disabled>
@@ -111,7 +129,7 @@ const Form = ({ players }) => {
                         })}
                     </select>
                 </div>
-                <div>
+                <div className="form__team">
                     <label htmlFor="team2">Team 2</label>
                     <select name="team2" defaultValue={"default"} ref={team2}>
                         <option value="default" disabled>
@@ -144,7 +162,7 @@ const Form = ({ players }) => {
                 </div>
             </div>
 
-            <div>
+            <div className="form__winner">
                 <label htmlFor="winningTeam">Winning Team</label>
                 <select
                     name="winningTeam"

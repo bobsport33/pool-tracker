@@ -13,7 +13,7 @@ export async function getData() {
 }
 
 export default async function Home() {
-    const data = await getData();
+    let data = await getData();
 
     return (
         <main>
