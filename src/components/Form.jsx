@@ -30,7 +30,7 @@ const FormCont = styled.form`
     }
 `;
 
-export async function updateData(data, winners, lossers) {
+export async function updateData(data, winners, lossers, results) {
     winners.map((winner) => {
         let curWins = data[winner]["wins"];
         console.log(curWins);
@@ -42,7 +42,6 @@ export async function updateData(data, winners, lossers) {
         data[losser]["losses"] = +curLosses + 1;
     });
 
-    console.log(data);
     const postRes = await fetch(
         "https://pool-records-default-rtdb.firebaseio.com/Players.json",
         {
@@ -56,10 +55,29 @@ export async function updateData(data, winners, lossers) {
     if (!postRes.ok) {
         throw new Error("failed to post data");
     }
+
+    const gameSummary = `${winners} beat ${lossers}`;
+    const time = new Date().toString();
+    results[time] = gameSummary;
+    console.log(results);
+
+    const gameRes = await fetch(
+        "https://pool-records-default-rtdb.firebaseio.com/Games.json",
+        {
+            method: "put",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(results),
+        }
+    );
+    if (!gameRes.ok) {
+        throw new Error("failed to post data");
+    }
     return postRes.json();
 }
 
-const Form = ({ players }) => {
+const Form = ({ players, results }) => {
     const users = Object.keys(players);
 
     const team1 = useRef();
@@ -93,10 +111,11 @@ const Form = ({ players }) => {
             ];
         }
 
-        updateData(players, winners, lossers);
+        updateData(players, winners, lossers, results);
     };
     return (
         <FormCont>
+            <h2>Add Game Results</h2>
             <div className="form__container">
                 <div className="form__team">
                     <label htmlFor="team1">Team 1</label>
