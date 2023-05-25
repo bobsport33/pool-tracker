@@ -40,8 +40,6 @@ const DarkMode = ({ children }) => {
 
     const clickHandler = (e) => {
         setDarkMode((current) => !current);
-
-        console.log(darkMode);
     };
 
     return (
