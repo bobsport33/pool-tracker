@@ -9,13 +9,15 @@ const SummaryCont = styled.section`
     align-items: center;
     justify-content: center;
     margin-top: 50px;
+    padding-bottom: 50px;
 `;
 
 const GameSummary = ({ results }) => {
+    let sortedGameTimes;
     if (results) {
         const gameTimes = Object.keys(results);
 
-        const sortedGameTimes = gameTimes.sort((a, b) => {
+        sortedGameTimes = gameTimes.sort((a, b) => {
             const timeA = new Date(a);
             const timeB = new Date(b);
             return timeB.getTime() - timeA.getTime();
@@ -45,7 +47,7 @@ const GameSummary = ({ results }) => {
                         "$1 and $2"
                     );
                     return (
-                        <p>
+                        <p key={dateObj}>
                             On {formattedString} {resultString}
                         </p>
                     );

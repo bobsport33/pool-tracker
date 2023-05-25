@@ -7,21 +7,22 @@ const RankingCardCont = styled.div`
     width: fit-content;
 
     .ranking__name {
-        width: 50px;
+        width: 70px;
+        text-align: center;
     }
 
     .ranking__number {
-        width: 20px;
+        width: 50px;
+        text-align: center;
     }
 
     .ranking__percentage {
-        width: 25px;
+        width: 135px;
+        text-align: center;
     }
 `;
 
-const RankingCard = ({ name, wins, losses }) => {
-    const winPercentage = Math.floor(100 * (wins / (wins + losses)));
-
+const RankingCard = ({ name, wins, losses, winPercentage }) => {
     return (
         <RankingCardCont>
             <p className="ranking__name">{name}</p>

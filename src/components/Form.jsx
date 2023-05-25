@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import styled from "styled-components";
 
-const FormCont = styled.form`
+const FormCont = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -31,9 +31,13 @@ const FormCont = styled.form`
 `;
 
 export async function updateData(data, winners, lossers, results) {
+    console.log(winners);
     winners.map((winner) => {
+        if (winner === "default") {
+            return;
+        }
         let curWins = data[winner]["wins"];
-        console.log(curWins);
+
         data[winner]["wins"] = +curWins + 1;
     });
 
@@ -56,10 +60,12 @@ export async function updateData(data, winners, lossers, results) {
         throw new Error("failed to post data");
     }
 
+    if (results === "") {
+        results = {};
+    }
     const gameSummary = `${winners} beat ${lossers}`;
     const time = new Date().toString();
     results[time] = gameSummary;
-    console.log(results);
 
     const gameRes = await fetch(
         "https://pool-records-default-rtdb.firebaseio.com/Games.json",
@@ -92,23 +98,57 @@ const Form = ({ players, results }) => {
         let lossers;
 
         if (team === "team1") {
-            winners = [
-                team1.current.selectedOptions[0].value,
-                team1p2.current.selectedOptions[0].value,
-            ];
-            lossers = [
-                team2.current.selectedOptions[0].value,
-                team2p2.current.selectedOptions[0].value,
-            ];
+            if (
+                team1p2.current.selectedOptions[0].value !== "default" &&
+                team2p2.current.selectedOptions[0].value !== "default"
+            ) {
+                winners = [
+                    team1.current.selectedOptions[0].value,
+                    team1p2.current.selectedOptions[0].value,
+                ];
+                lossers = [
+                    team2.current.selectedOptions[0].value,
+                    team2p2.current.selectedOptions[0].value,
+                ];
+            } else if (team1p2.current.selectedOptions[0].value !== "default") {
+                winners = [
+                    team1.current.selectedOptions[0].value,
+                    team1p2.current.selectedOptions[0].value,
+                ];
+                lossers = [team2.current.selectedOptions[0].value];
+            } else if (team2p2.current.selectedOptions[0].value !== "default") {
+                winners = [team1.current.selectedOptions[0].value];
+                lossers = [
+                    team2.current.selectedOptions[0].value,
+                    team2p2.current.selectedOptions[0].value,
+                ];
+            }
         } else if (team === "team2") {
-            winners = [
-                team2.current.selectedOptions[0].value,
-                team2p2.current.selectedOptions[0].value,
-            ];
-            lossers = [
-                team1.current.selectedOptions[0].value,
-                team1p2.current.selectedOptions[0].value,
-            ];
+            if (
+                team2p2.current.selectedOptions[0].value !== "default" &&
+                team1p2.current.selectedOptions[0].value !== "default"
+            ) {
+                winners = [
+                    team2.current.selectedOptions[0].value,
+                    team2p2.current.selectedOptions[0].value,
+                ];
+                lossers = [
+                    team1.current.selectedOptions[0].value,
+                    team1p2.current.selectedOptions[0].value,
+                ];
+            } else if (team2p2.current.selectedOptions[0].value !== "default") {
+                winners = [
+                    team2.current.selectedOptions[0].value,
+                    team2p2.current.selectedOptions[0].value,
+                ];
+                lossers = [team1.current.selectedOptions[0].value];
+            } else if (team1p2.current.selectedOptions[0].value) {
+                winners = [team2.current.selectedOptions[0].value];
+                lossers = [
+                    team1.current.selectedOptions[0].value,
+                    team1p2.current.selectedOptions[0].value,
+                ];
+            }
         }
 
         updateData(players, winners, lossers, results);

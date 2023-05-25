@@ -26,6 +26,13 @@ const LeaderBoard = ({ players }) => {
         <LeaderBoardCont>
             <h2>Leaderboard</h2>
             <div className="leaderboard__container">
+                <RankingCard
+                    key={"titles"}
+                    name="Name"
+                    wins="Wins"
+                    losses="Losses"
+                    winPercentage={"Win Percentage"}
+                />
                 {users.map((player, index) => {
                     return (
                         <RankingCard
@@ -33,6 +40,11 @@ const LeaderBoard = ({ players }) => {
                             name={player}
                             wins={players[player].wins}
                             losses={players[player].losses}
+                            winPercentage={Math.floor(
+                                (100 * players[player].wins) /
+                                    (players[player].wins +
+                                        players[player].losses)
+                            )}
                         />
                     );
                 })}

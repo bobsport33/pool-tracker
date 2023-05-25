@@ -26,7 +26,8 @@ const DarkModeCont = styled.div`
                 h5,
                 h6,
                 p,
-                a {
+                a,
+                label {
                     color: white;
                 }
             `;
