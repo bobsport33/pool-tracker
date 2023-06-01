@@ -4,7 +4,7 @@ import LeaderBoard from "../components/LeaderBoard";
 import Form from "../components/Form";
 import Hero from "../components/Hero";
 import GameSummary from "@/components/GameSummary";
-import DarkMode from "@/components/DarkMode";
+
 import Animation from "./Animation";
 import styled, { css } from "styled-components";
 
@@ -112,7 +112,6 @@ const GameResults = ({ player, game }) => {
     };
     return (
         <GameCont $finished={animationFinished}>
-            {/* <DarkMode> */}
             <Animation onFinish={animationHandler} />
             <Hero />
             <LeaderBoard players={playerData} />
@@ -122,7 +121,6 @@ const GameResults = ({ player, game }) => {
                 onUpdate={updateResultsHandler}
             />
             <GameSummary results={gameData} />
-            {/* </DarkMode> */}
         </GameCont>
     );
 };
