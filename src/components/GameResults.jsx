@@ -6,18 +6,6 @@ import Hero from "../components/Hero";
 import GameSummary from "@/components/GameSummary";
 
 import Animation from "./Animation";
-import styled, { css } from "styled-components";
-
-const GameCont = styled.div`
-    transition: transform 0.8s;
-    ${({ $finished }) => {
-        if ($finished) {
-            return css`
-                transform: translateY(-100vh);
-            `;
-        }
-    }}
-`;
 
 export async function updatePlayers(data, winners, lossers, results) {
     winners.map((winner) => {
@@ -111,7 +99,7 @@ const GameResults = ({ player, game }) => {
         setAnimationFinished(true);
     };
     return (
-        <GameCont $finished={animationFinished}>
+        <>
             <Animation onFinish={animationHandler} />
             <Hero />
             <LeaderBoard players={playerData} />
@@ -121,7 +109,7 @@ const GameResults = ({ player, game }) => {
                 onUpdate={updateResultsHandler}
             />
             <GameSummary results={gameData} />
-        </GameCont>
+        </>
     );
 };
 

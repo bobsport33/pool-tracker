@@ -4,28 +4,40 @@ import animationData from "./poolBall.json";
 import styled, { css } from "styled-components";
 
 const AnimationCont = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 100vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #2c8257;
     transition: transform 0.8s;
+
+    ${({ $finished }) => {
+        if ($finished) {
+            return css`
+                transform: translateY(-100vh);
+            `;
+        }
+    }}
 `;
 
-const Animation = ({ onFinish }) => {
-    // const [finished, setFinished] = useState(false);
+const Animation = () => {
+    const [finished, setFinished] = useState(false);
 
-    // const finishAnimationhandler = () => {
-    //     setFinished(true);
-    // };
+    const finishAnimationHandler = () => {
+        setFinished(true);
+    };
 
     return (
-        <AnimationCont>
+        <AnimationCont $finished={finished}>
             <Lottie
                 animationData={animationData}
                 autoplay={true}
                 loop={false}
-                onComplete={onFinish}
+                onComplete={finishAnimationHandler}
             />
         </AnimationCont>
     );
