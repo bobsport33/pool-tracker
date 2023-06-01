@@ -1,4 +1,3 @@
-"use server";
 import GameResults from "@/components/GameResults";
 
 export async function getData() {

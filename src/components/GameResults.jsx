@@ -5,6 +5,19 @@ import Form from "../components/Form";
 import Hero from "../components/Hero";
 import GameSummary from "@/components/GameSummary";
 import DarkMode from "@/components/DarkMode";
+import Animation from "./Animation";
+import styled, { css } from "styled-components";
+
+const GameCont = styled.div`
+    transition: transform 0.8s;
+    ${({ $finished }) => {
+        if ($finished) {
+            return css`
+                transform: translateY(-100vh);
+            `;
+        }
+    }}
+`;
 
 export async function updatePlayers(data, winners, lossers, results) {
     winners.map((winner) => {
@@ -80,6 +93,7 @@ export async function updateGames(data, winners, lossers, results) {
 const GameResults = ({ player, game }) => {
     const [playerData, setPlayerData] = useState(player);
     const [gameData, setGameData] = useState(game);
+    const [animationFinished, setAnimationFinished] = useState(false);
 
     const updateResultsHandler = async (data, winners, lossers, results) => {
         const newPlayersData = await updatePlayers(
@@ -92,19 +106,24 @@ const GameResults = ({ player, game }) => {
         setPlayerData(newPlayersData);
         setGameData(newGameData);
     };
+
+    const animationHandler = () => {
+        setAnimationFinished(true);
+    };
     return (
-        <>
-            <DarkMode>
-                <Hero />
-                <LeaderBoard players={playerData} />
-                <Form
-                    players={playerData}
-                    results={gameData}
-                    onUpdate={updateResultsHandler}
-                />
-                <GameSummary results={gameData} />
-            </DarkMode>
-        </>
+        <GameCont $finished={animationFinished}>
+            {/* <DarkMode> */}
+            <Animation onFinish={animationHandler} />
+            <Hero />
+            <LeaderBoard players={playerData} />
+            <Form
+                players={playerData}
+                results={gameData}
+                onUpdate={updateResultsHandler}
+            />
+            <GameSummary results={gameData} />
+            {/* </DarkMode> */}
+        </GameCont>
     );
 };
 
