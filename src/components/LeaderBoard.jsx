@@ -9,7 +9,7 @@ const LeaderBoardCont = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 100px;
+
     .leaderboard__container {
         margin-top: 20px;
         display: flex;

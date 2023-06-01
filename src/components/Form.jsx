@@ -2,12 +2,14 @@
 import { useRef } from "react";
 import styled from "styled-components";
 
-const FormCont = styled.div`
+const FormCont = styled.form`
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    grid-row: 3 / 4;
+    grid-column: 1 / 3;
 
     .form__container {
         display: flex;
@@ -39,7 +41,8 @@ const Form = ({ players, results, onUpdate }) => {
     const team2p2 = useRef();
     const winningTeam = useRef();
 
-    const updateHandler = () => {
+    const updateHandler = (e) => {
+        e.preventDefault();
         const team = winningTeam.current.selectedOptions[0].value;
         let winners;
         let lossers;

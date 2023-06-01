@@ -4,8 +4,17 @@ import LeaderBoard from "../components/LeaderBoard";
 import Form from "../components/Form";
 import Hero from "../components/Hero";
 import GameSummary from "@/components/GameSummary";
-
 import Animation from "./Animation";
+import styled from "styled-components";
+
+const GameCont = styled.div`
+    .results-grid {
+        padding: 150px 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 30px;
+    }
+`;
 
 export async function updatePlayers(data, winners, lossers, results) {
     winners.map((winner) => {
@@ -99,17 +108,20 @@ const GameResults = ({ player, game }) => {
         setAnimationFinished(true);
     };
     return (
-        <>
-            <Animation onFinish={animationHandler} />
-            <Hero />
-            <LeaderBoard players={playerData} />
-            <Form
-                players={playerData}
-                results={gameData}
-                onUpdate={updateResultsHandler}
-            />
-            <GameSummary results={gameData} />
-        </>
+        <GameCont>
+            {/* <Animation onFinish={animationHandler} /> */}
+
+            <div className="results-grid">
+                <Hero />
+                <LeaderBoard players={playerData} />
+                <Form
+                    players={playerData}
+                    results={gameData}
+                    onUpdate={updateResultsHandler}
+                />
+                <GameSummary results={gameData} />
+            </div>
+        </GameCont>
     );
 };
 

@@ -8,8 +8,8 @@ const SummaryCont = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
-    padding-bottom: 50px;
+    grid-row: 2/ 3;
+    grid-column: 2/3;
 `;
 
 const GameSummary = ({ results }) => {
