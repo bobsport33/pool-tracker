@@ -1,8 +1,5 @@
-import LeaderBoard from "../components/LeaderBoard";
-import Form from "../components/Form";
-import Hero from "../components/Hero";
-import GameSummary from "@/components/GameSummary";
-import DarkMode from "@/components/DarkMode";
+"use server";
+import GameResults from "@/components/GameResults";
 
 export async function getData() {
     const response = await fetch(
@@ -22,12 +19,7 @@ export default async function Home() {
 
     return (
         <main>
-            <DarkMode>
-                <Hero />
-                <LeaderBoard players={playerData} />
-                <Form players={playerData} results={gameData} />
-                <GameSummary results={gameData} />
-            </DarkMode>
+            <GameResults player={playerData} game={gameData} />
         </main>
     );
 }
