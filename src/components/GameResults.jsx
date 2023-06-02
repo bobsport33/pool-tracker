@@ -7,6 +7,7 @@ import GameSummary from "@/components/GameSummary";
 import Animation from "./Animation";
 import styled from "styled-components";
 import { media } from "../app/styles/variables";
+import GlobalStyle from "@/app/styles/GlobalStyle";
 
 const GameCont = styled.div`
     width: 100%;
@@ -136,6 +137,7 @@ const GameResults = ({ player, game }) => {
     };
     return (
         <GameCont>
+            <GlobalStyle />
             {/* <Animation onFinish={animationHandler} /> */}
             <div className="background__image"></div>
             <div className="results-grid">
