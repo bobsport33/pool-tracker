@@ -138,7 +138,7 @@ const GameResults = ({ player, game }) => {
     return (
         <GameCont>
             <GlobalStyle />
-            {/* <Animation onFinish={animationHandler} /> */}
+            <Animation onFinish={animationHandler} />
             <div className="background__image"></div>
             <div className="results-grid">
                 <Hero />
