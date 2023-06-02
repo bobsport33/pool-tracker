@@ -3,6 +3,7 @@
 import React from "react";
 import RankingCard from "./RankingCard";
 import styled from "styled-components";
+import { media } from "@/app/styles/variables";
 
 const LeaderBoardCont = styled.section`
     padding: 30px;
@@ -21,6 +22,10 @@ const LeaderBoardCont = styled.section`
         rgba(160, 184, 172, 1) 50%,
         rgba(212, 213, 212, 1) 100%
     );
+
+    @media ${media.mobile} {
+        padding: 25px;
+    }
 
     h2 {
         color: rgb(5, 5, 5);
@@ -47,7 +52,7 @@ const LeaderBoard = ({ players }) => {
                     name="Name"
                     wins="Wins"
                     losses="Losses"
-                    winPercentage={"Win Percentage"}
+                    winPercentage={"Win"}
                 />
                 {users.map((player, index) => {
                     return (

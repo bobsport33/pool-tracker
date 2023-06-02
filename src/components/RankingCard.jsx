@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { media } from "@/app/styles/variables";
 
 const RankingCardCont = styled.div`
     display: flex;
     gap: 20px;
     width: fit-content;
+    @media ${media.mobile} {
+        gap: 10px;
+    }
 
     .ranking__name {
         width: 70px;
@@ -19,7 +23,7 @@ const RankingCardCont = styled.div`
     }
 
     .ranking__percentage {
-        width: 135px;
+        width: 50px;
         text-align: center;
         color: rgb(5, 5, 5);
     }

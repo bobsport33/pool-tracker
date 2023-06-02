@@ -19,6 +19,12 @@ const FormCont = styled.form`
             display: grid;
             grid-template-columns: repeat(2, 1fr);
         }
+
+        @media ${media.mobile} {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
     }
 
     .ball {

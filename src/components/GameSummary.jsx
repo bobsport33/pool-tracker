@@ -2,6 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import { media } from "@/app/styles/variables";
 
 const SummaryCont = styled.section`
     display: flex;
@@ -69,7 +70,7 @@ const GameSummary = ({ results }) => {
                     );
                     return (
                         <p key={dateObj}>
-                            On {formattedString} {resultString}
+                            -On {formattedString} {resultString}
                         </p>
                     );
                 })}
