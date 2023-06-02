@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import styled from "styled-components";
+import { media } from "@/app/styles/variables";
 
 const FormCont = styled.form`
     width: 100%;
@@ -14,6 +15,10 @@ const FormCont = styled.form`
     .form__container {
         display: flex;
         gap: 50px;
+        @media ${media.tablet} {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 
     .ball {
@@ -162,6 +167,12 @@ const Form = ({ players, results, onUpdate }) => {
                 lossers = [team1.current.selectedOptions[0].value];
             }
         }
+
+        team1.current.value = "default";
+        team1p2.current.value = "default";
+        team2.current.value = "default";
+        team2p2.current.value = "default";
+        winningTeam.current.value = "default";
 
         onUpdate(players, winners, lossers, results);
     };

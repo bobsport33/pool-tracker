@@ -48,11 +48,11 @@ p {
 }
 
 h1 {
-    font-size: 3.2rem;
+    font-size: 4rem;
 }
 
 h2 {
-    font-size: 2.4rem;
+    font-size: 3rem;
 }
 
 p {
