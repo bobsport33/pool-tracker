@@ -6,13 +6,39 @@ import Hero from "../components/Hero";
 import GameSummary from "@/components/GameSummary";
 import Animation from "./Animation";
 import styled from "styled-components";
+import { media } from "../app/styles/variables";
 
 const GameCont = styled.div`
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+
+    .background__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -10;
+        height: 100%;
+        width: 100%;
+
+        @media ${media.tablet} {
+            transform: rotate(90deg);
+        }
+    }
+
     .results-grid {
         padding: 150px 0;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         row-gap: 30px;
+        justify-items: center;
+
+        @media ${media.tablet} {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     }
 `;
 
@@ -110,7 +136,7 @@ const GameResults = ({ player, game }) => {
     return (
         <GameCont>
             {/* <Animation onFinish={animationHandler} /> */}
-
+            <div className="background__image"></div>
             <div className="results-grid">
                 <Hero />
                 <LeaderBoard players={playerData} />

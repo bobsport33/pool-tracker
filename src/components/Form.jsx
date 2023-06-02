@@ -16,19 +16,75 @@ const FormCont = styled.form`
         gap: 50px;
     }
 
-    .form__team {
-        width: 50%;
+    .ball {
+        height: 175px;
+        width: 175px;
+        border-radius: 50%;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         gap: 10px;
+        filter: drop-shadow(15px 10px 4px #333);
+
+        &-1 {
+            background: rgb(255, 0, 0);
+            background: radial-gradient(
+                circle,
+                rgba(255, 0, 0, 1) 0%,
+                rgba(156, 0, 0, 1) 100%
+            );
+        }
+
+        &-2 {
+            background: rgb(0, 0, 255);
+            background: radial-gradient(
+                circle,
+                rgba(0, 0, 255, 1) 0%,
+                rgba(2, 2, 92, 1) 100%
+            );
+        }
+
+        &-3 {
+            background: rgb(52, 49, 49);
+            background: radial-gradient(
+                circle,
+                rgba(52, 49, 49, 1) 0%,
+                rgba(0, 0, 0, 1) 100%
+            );
+        }
+
+        &-4 {
+            border: none;
+
+            background: rgb(246, 246, 244);
+            background: radial-gradient(
+                circle,
+                rgba(246, 246, 244, 1) 0%,
+                rgba(216, 217, 193, 1) 100%
+            );
+            overflow: hidden;
+        }
     }
 
-    .form__winner {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
+    .btn {
+        font-family: "Open Sans", sans-serif;
+        font-size: 2rem;
+        border: none;
+        padding: 30px 0;
+        width: 100%;
+        background: rgb(0, 128, 0);
+        background: linear-gradient(
+            90deg,
+            rgba(0, 128, 0, 1) 0%,
+            rgba(18, 187, 18, 1) 50%,
+            rgba(0, 128, 0, 1) 100%
+        );
+        color: white;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 `;
 
@@ -113,7 +169,7 @@ const Form = ({ players, results, onUpdate }) => {
         <FormCont>
             <h2>Add Game Results</h2>
             <div className="form__container">
-                <div className="form__team">
+                <div className="form__team ball ball-1">
                     <label htmlFor="team1">Team 1</label>
                     <select name="team1" defaultValue={"default"} ref={team1}>
                         <option value="default" disabled>
@@ -144,7 +200,7 @@ const Form = ({ players, results, onUpdate }) => {
                         })}
                     </select>
                 </div>
-                <div className="form__team">
+                <div className="form__team ball ball-2">
                     <label htmlFor="team2">Team 2</label>
                     <select name="team2" defaultValue={"default"} ref={team2}>
                         <option value="default" disabled>
@@ -175,23 +231,26 @@ const Form = ({ players, results, onUpdate }) => {
                         })}
                     </select>
                 </div>
+                <div className="form__winner ball ball-3">
+                    <label htmlFor="winningTeam">Winning Team</label>
+                    <select
+                        name="winningTeam"
+                        defaultValue={"default"}
+                        ref={winningTeam}
+                    >
+                        <option value="default" disabled>
+                            Select your option
+                        </option>
+                        <option value="team1">Team 1</option>
+                        <option value="team2">Team 2</option>
+                    </select>
+                </div>
+                <div className="ball ball-4">
+                    <button className="btn" onClick={updateHandler}>
+                        Submit
+                    </button>
+                </div>
             </div>
-
-            <div className="form__winner">
-                <label htmlFor="winningTeam">Winning Team</label>
-                <select
-                    name="winningTeam"
-                    defaultValue={"default"}
-                    ref={winningTeam}
-                >
-                    <option value="default" disabled>
-                        Select your option
-                    </option>
-                    <option value="team1">Team 1</option>
-                    <option value="team2">Team 2</option>
-                </select>
-            </div>
-            <button onClick={updateHandler}>Submit</button>
         </FormCont>
     );
 };

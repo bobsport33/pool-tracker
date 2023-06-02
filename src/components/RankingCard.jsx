@@ -9,16 +9,19 @@ const RankingCardCont = styled.div`
     .ranking__name {
         width: 70px;
         text-align: center;
+        color: rgb(5, 5, 5);
     }
 
     .ranking__number {
         width: 50px;
         text-align: center;
+        color: rgb(5, 5, 5);
     }
 
     .ranking__percentage {
         width: 135px;
         text-align: center;
+        color: rgb(5, 5, 5);
     }
 `;
 

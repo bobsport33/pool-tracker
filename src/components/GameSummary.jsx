@@ -6,10 +6,31 @@ import styled from "styled-components";
 const SummaryCont = styled.section`
     display: flex;
     flex-direction: column;
-    align-items: center;
+
     justify-content: center;
     grid-row: 2/ 3;
     grid-column: 2/3;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 12px 12px 2px 1px rgba(68, 69, 68, 0.2);
+
+    background: rgb(212, 213, 212);
+    background: linear-gradient(
+        90deg,
+        rgba(212, 213, 212, 1) 0%,
+        rgba(160, 184, 172, 1) 50%,
+        rgba(212, 213, 212, 1) 100%
+    );
+
+    h2,
+    p {
+        color: rgb(5, 5, 5);
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
 `;
 
 const GameSummary = ({ results }) => {

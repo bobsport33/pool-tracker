@@ -4,6 +4,7 @@ import animationData from "./poolBall.json";
 import styled, { css } from "styled-components";
 
 const AnimationCont = styled.div`
+    z-index: 10000;
     position: absolute;
     top: 0;
     left: 0;
