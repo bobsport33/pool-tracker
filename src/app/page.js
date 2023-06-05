@@ -3,7 +3,7 @@ import GameResults from "@/components/GameResults";
 export async function getData() {
     const response = await fetch(
         "https://pool-records-default-rtdb.firebaseio.com/.json",
-        { cache: "force-cache" }
+        { cache: "force-cache", revalidate: 30 }
     );
     if (!response.ok) {
         throw new Error("failed to fetch data");
