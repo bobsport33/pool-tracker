@@ -9,17 +9,9 @@ import axios from "axios";
 // }
 
 export default async function Home() {
-    let data = (
-        await axios.get(
-            "https://pool-records-default-rtdb.firebaseio.com/.json"
-        )
-    ).data;
-    let playerData = data.Players;
-    let gameData = data.Games;
-
     return (
         <main>
-            <GameResults player={playerData} game={gameData} />
+            <GameResults />
         </main>
     );
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LeaderBoard from "../components/LeaderBoard";
 import Form from "../components/Form";
 import Hero from "../components/Hero";
@@ -8,6 +8,7 @@ import Animation from "./Animation";
 import styled from "styled-components";
 import { media } from "../app/styles/variables";
 import GlobalStyle from "@/app/styles/GlobalStyle";
+import axios from "axios";
 
 const GameCont = styled.div`
     width: 100%;
@@ -115,10 +116,24 @@ export async function updateGames(data, winners, lossers, results) {
     return gameRes.json();
 }
 
-const GameResults = ({ player, game }) => {
-    const [playerData, setPlayerData] = useState(player);
-    const [gameData, setGameData] = useState(game);
+const GameResults = () => {
+    const [playerData, setPlayerData] = useState({});
+    const [gameData, setGameData] = useState({});
     const [animationFinished, setAnimationFinished] = useState(false);
+
+    const getData = async () => {
+        let data = (
+            await axios.get(
+                "https://pool-records-default-rtdb.firebaseio.com/.json"
+            )
+        ).data;
+        setPlayerData(data.Players);
+        setGameData(data.Games);
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     const updateResultsHandler = async (data, winners, lossers, results) => {
         const newPlayersData = await updatePlayers(
