@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 
 const AnimationCont = styled.div`
     z-index: 10000;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
